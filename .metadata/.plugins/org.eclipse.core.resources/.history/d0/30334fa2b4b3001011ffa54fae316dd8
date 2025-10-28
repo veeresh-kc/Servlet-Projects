@@ -1,0 +1,41 @@
+package RegistrataionForm;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class RegistrationServlet
+ */
+@WebServlet("/RegistrationServlet")
+public class RegistrationServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+  
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		String participantName=request.getParameter("participantName");
+		String []qulification=request.getParameterValues("qualification");
+		String gender=request.getParameter("gender");
+		String contact=request.getParameter("contact");
+		String qual="";
+		for(int i=0;i<qulification.length;i++) {
+			qual+=qulification[i]+"<br>";
+		}
+		out.print("<html><body>");
+		out.print("<table border 2px solid black>");
+		out.print("<tr><td>Student Name:</td><td>"+participantName+"</td></tr>");
+		out.print("<tr><td>Student Quanlification:</td><td>"+qual+"</td></tr>");
+		out.print("<tr><td>Student Gender:</td><td>"+gender+"</td></tr>");
+		out.print("<tr><td>Student Contact:</td><td>"+contact+"</td></tr>");
+		out.print("</table></body></html>");
+		
+	}
+
+}

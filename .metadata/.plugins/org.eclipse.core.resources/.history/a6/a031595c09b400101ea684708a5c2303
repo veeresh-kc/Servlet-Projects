@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration Form</title>
+</head>
+<body>
+<h2>Registration Form</h2>
+
+<form action="RegistrationServlet" method="post">
+<table cellpadding="8">
+    <tr>
+        <td>Name:</td>
+        <td><input type="text" name="participantName" required></td>
+    </tr>
+
+    <tr>
+        <td>Qualification:</td>
+        <td>
+            <select size="5" name="qualification" multiple>
+                <option value="BCA">B.C.A</option>
+                <option value="MSC">M.S.C</option>
+                <option value="MCA">M.C.A</option>
+                <option value="BTech">B.Tech</option>
+                <option value="MTech">M.Tech</option>
+            </select>
+            <br><small>(Hold Ctrl to select multiple)</small>
+        </td>
+    </tr>
+
+    <tr>
+        <td>Gender:</td>
+        <td>
+            <input type="radio" name="gender" value="Male"> Male
+            <input type="radio" name="gender" value="Female"> Female
+            <input type="radio" name="gender" value="Other"> Other
+        </td>
+    </tr>
+
+    <tr>
+        <td>Contact:</td>
+        <td><input type="text" name="contact" required></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" align="center">
+            <button type="submit">Submit</button>
+        </td>
+    </tr>
+</table>
+</form>
+
+</body>
+</html>

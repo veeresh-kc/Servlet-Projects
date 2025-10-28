@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Regisration from</title>
+</head>
+<body>
+<h2>Regisration from</h2>
+<form action="" method="post">
+<table>
+	<tr>
+	<td>Name:</td>
+	<td><input type="text" name="participantName"></td>
+	</tr>
+	<tr>
+	<td>Qualification</td>
+	<td><select size="5" name="qualification">
+	<option value="BCA">B.C.A</option>
+	<option value="MSC">M.S.C</option>
+	<option value="MCA">M.C.A</option>
+	<option value="BTch">B.Tech</option>
+	<option value="MTech">M.Tech</option>
+	</select></td>
+	</tr>
+	<tr>
+	<td>Gender</td>
+	<td><input type="radio" name="gender">Male</td>
+	<td><input type="radio" name="gender">Female</td>
+	<td><input type="radio" name="gender">Others</td>
+	</tr>
+	<tr>
+	<td>
+	</tr>
+
+
+</table>
+
+
+
+
+</form>
+</body>
+</html>
