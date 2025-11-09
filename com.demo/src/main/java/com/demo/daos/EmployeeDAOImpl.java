@@ -59,12 +59,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	private Employee mapROW(ResultSet rs) throws SQLException {
 		Employee e = new Employee();
 		e.setId(rs.getInt("id"));
-		e.setName("name");
+		e.setName(rs.getString("name"));
 		e.setEmail(rs.getString("email"));
 		Double sal = rs.getDouble("sal");
 		sal = sal != null ? sal : 0.0;
 		e.setSal(sal);
-		e.setDept("dept");
+		e.setDept(rs.getString("dept"));
 		LocalDateTime createdAt = null;
 		Timestamp ts = rs.getTimestamp("createdAt");
 		createdAt = ts != null ? ts.toLocalDateTime() : LocalDateTime.now();
@@ -74,7 +74,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public int insert(Employee e) {
-		String sql = "insert into employees value(?,?,?,?)";
+		String sql = "INSERT INTO employees (name, email, sal, dept) VALUES (?, ?, ?, ?)";
 		int i = 0;
 		try {
 			Connection con = MyDBConnection.getConnection();
@@ -92,7 +92,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public int update(Employee e) {
-		String sql = "update from employees set ename=?,email=?,sal=?,dept=?,createdAt=? where id=?";
+		String sql = "update employees set name=?,email=?,sal=?,dept=? where id=?";
 		int i = 0;
 		try {
 			Connection con = MyDBConnection.getConnection();
@@ -101,7 +101,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			ps.setString(2, e.getEmail());
 			ps.setDouble(3, e.getSal());
 			ps.setString(4, e.getDept());
-			ps.setTimestamp(5, Timestamp.valueOf(e.getCreatedAt()));
+			ps.setInt(5, e.getId());
+			i=ps.executeUpdate();
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}

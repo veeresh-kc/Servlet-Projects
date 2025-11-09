@@ -49,18 +49,18 @@ public class EmployeeServlet extends HttpServlet {
 		}
 	}
 
-	private void listEmployees(HttpServletRequest request, HttpServletResponse response) {
+	private void listEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Employee> employees=dao.findAll();
 		request.setAttribute("employees", employees);
-		//creating a page
+		request.getRequestDispatcher("/WEB-INF/views/list.jsp").forward(request, response);
 	}
 
-	private void showForm(HttpServletRequest request, HttpServletResponse response, Employee e) {
+	private void showForm(HttpServletRequest request, HttpServletResponse response, Employee e) throws ServletException, IOException {
 		request.setAttribute("employee", e);
-		//creating page
+		request.getRequestDispatcher("/WEB-INF/views/form.jsp").forward(request, response);
 	}
 	
-	private void editForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void editForm(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String idString=request.getParameter("id");
 		if(idString==null) {
 			response.sendRedirect(request.getContextPath()+"/employees");
@@ -73,13 +73,13 @@ public class EmployeeServlet extends HttpServlet {
 				showForm(request, response, emp.get());
 			}
 		}
-		//creating a page
 	}
 
 	private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String idStr=request.getParameter("id");
 		if(idStr!=null) {
 			dao.delete(Integer.parseInt(idStr));
+			response.sendRedirect(request.getContextPath()+"/employees");
 		}else {
 			response.sendRedirect(request.getContextPath()+"/employees");
 		}
@@ -106,7 +106,7 @@ public class EmployeeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");// optional
 		response.setCharacterEncoding("UTF-8");// optional
-		String path=request.getContextPath();
+		String path=request.getServletPath();
 		switch(path) {
 		case "/employees/insert":
 				insertEmployee(request,response);
@@ -122,7 +122,7 @@ public class EmployeeServlet extends HttpServlet {
 	private void insertEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Employee e=bindEmployee(request);
 		dao.insert(e);
-		response.sendRedirect(request.getContextPath()+"/employee");
+		response.sendRedirect(request.getContextPath()+"/employees");
 	}
 	private Employee bindEmployee(HttpServletRequest request) {
 		String name=trim(request.getParameter("name"));
@@ -158,7 +158,6 @@ public class EmployeeServlet extends HttpServlet {
 		Employee e=bindEmployee(request);
 		e.setId(Integer.parseInt(idstr));
 		dao.update(e);
-		response.sendRedirect(request.getContextPath()+"/employees");
-		
+		response.sendRedirect(request.getContextPath()+"/employees");	
 	}
 }

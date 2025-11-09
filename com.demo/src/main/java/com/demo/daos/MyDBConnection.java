@@ -22,15 +22,14 @@ public class MyDBConnection {
 
             String driver = props.getProperty("driver-class");
             String url = props.getProperty("driver-url");
-            String user = props.getProperty("user");
-            String pass = props.getProperty("password");
+            String user = props.getProperty("driver-username");
+            String pass = props.getProperty("driver-password");
 
             // Load driver class
             Class.forName(driver);
 
             // Create DB connection
             con = DriverManager.getConnection(url, user, pass);
-            System.out.println("✅ Database connected successfully!");
 
         } catch (Exception e) {
             e.printStackTrace();
